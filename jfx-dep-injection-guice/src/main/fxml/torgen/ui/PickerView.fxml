@@ -1,0 +1,8 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ColorPicker?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1" BorderPane.alignment="CENTER" fx:controller="torgen.controller.PickerController">
+    <ColorPicker fx:id="picker1" />
+    <ColorPicker fx:id="picker2" />
+</HBox>

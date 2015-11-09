@@ -1,0 +1,8 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1" BorderPane.alignment="CENTER" fx:controller="torgen.controller.TextController">
+    <TextField fx:id="text1" text="Button1"  editable="false" />
+    <TextField fx:id="text2" text="Button2"  editable="false" />
+</HBox>
