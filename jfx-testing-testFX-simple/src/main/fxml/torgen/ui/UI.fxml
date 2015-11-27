@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ComboBox?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="torgen.controller.SimpleController">
+    <TextField fx:id="text" text="Button"  editable="true" />
+    <ColorPicker fx:id="picker" />
+    <Button text="Darker!" fx:id="button" />
+    <Spinner fx:id="spinner" min="0" max="255" amountToStepBy="1" editable="true" />
+    <ComboBox fx:id="combobox" />
+</VBox>
+
