@@ -1,6 +1,5 @@
 package torgen.controller;
 
-import com.google.inject.Singleton;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -14,7 +13,6 @@ import javafx.util.StringConverter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-@Singleton
 public class SimpleController implements Initializable {
     @FXML ColorPicker picker;
     @FXML TextField text;
