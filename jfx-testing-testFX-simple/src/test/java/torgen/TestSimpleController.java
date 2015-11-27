@@ -3,6 +3,7 @@ package torgen;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -15,10 +16,12 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
+import torgen.utils.FxImageComparison;
 import torgen.utils.FxRobotColourPicker;
 import torgen.utils.FxRobotListSelection;
 import torgen.utils.FxRobotSpinner;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
@@ -26,18 +29,21 @@ import static org.junit.Assert.assertNotNull;
 
 /* A TestFX test class must extends ApplicationTest. The interfaces used by the test class are robots that
 * can interact with some widgets not supported by TestFX yet. */
-public class TestSimpleController extends ApplicationTest implements FxRobotColourPicker, FxRobotSpinner, FxRobotListSelection {
+public class TestSimpleController extends ApplicationTest implements FxRobotColourPicker, FxRobotSpinner,
+        FxRobotListSelection, FxImageComparison {
     /* The widgets of the GUI used for the tests. */
     ColorPicker picker;
     TextField text;
     Button button;
     Spinner<Double> spinner;
     ComboBox<Color> combobox;
+    Parent mainNode;
 
     /* This operation comes from ApplicationTest and loads the GUI to test. */
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(SimpleJFXApp.class.getResource("/torgen/ui/UI.fxml"))));
+        mainNode = FXMLLoader.load(SimpleJFXApp.class.getResource("/torgen/ui/UI.fxml"));
+        stage.setScene(new Scene(mainNode));
         stage.show();
         /* Do not forget to put the GUI in front of windows. Otherwise, the robots may interact with another
         window, the one in front of all the windows... */
@@ -156,5 +162,10 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
         WaitForAsyncUtils.waitForFxEvents();
 
         assertEquals(combobox.getValue(), picker.getValue());
+    }
+
+    @Test
+    public void testGUIRendering() throws IOException {
+        assertSnapshotsEqual("src/resources/test/snapshots/snapshotGUI.png", mainNode, 0d);
     }
 }
