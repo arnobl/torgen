@@ -29,10 +29,10 @@ public interface FxImageComparison {
         BufferedImage buffer1 = null;
         BufferedImage buffer2 = null;
 
-        try {
-            Platform.runLater(() -> nodeUnderTest.snapshot(null, writableImage));
-            WaitForAsyncUtils.waitForFxEvents();
+        Platform.runLater(() -> nodeUnderTest.snapshot(null, writableImage));
+        WaitForAsyncUtils.waitForFxEvents();
 
+        try {
             buffer1 = ImageIO.read(new File(referenceSnapshot));
             buffer2 = SwingFXUtils.fromFXImage(writableImage, null);
             assertEquals("The two snapshots differ", 0d, computeSnapshotSimilarity(buffer2, buffer1), tolerance);
