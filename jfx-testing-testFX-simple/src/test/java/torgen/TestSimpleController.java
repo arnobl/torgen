@@ -19,30 +19,40 @@ import torgen.utils.FxRobotColourPicker;
 import torgen.utils.FxRobotListSelection;
 import torgen.utils.FxRobotSpinner;
 
-import static org.junit.Assert.*;
-
 import java.util.concurrent.TimeoutException;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+/* A TestFX test class must extends ApplicationTest. The interfaces used by the test class are robots that
+* can interact with some widgets not supported by TestFX yet. */
 public class TestSimpleController extends ApplicationTest implements FxRobotColourPicker, FxRobotSpinner, FxRobotListSelection {
+    /* The widgets of the GUI used for the tests. */
     ColorPicker picker;
     TextField text;
     Button button;
     Spinner<Double> spinner;
     ComboBox<Color> combobox;
 
+    /* This operation comes from ApplicationTest and loads the GUI to test. */
     @Override
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(FXMLLoader.load(SimpleJFXApp.class.getResource("/torgen/ui/UI.fxml"))));
         stage.show();
+        /* Do not forget to put the GUI in front of windows. Otherwise, the robots may interact with another
+        window, the one in front of all the windows... */
         stage.toFront();
     }
 
+    /* Just a shortcut to retrieve widgets in the GUI. */
     public <T extends Node> T find(final String query) {
+        /** TestFX provides many operations to retrieve elements from the loaded GUI. */
         return lookup(query).queryFirst();
     }
 
     @Before
     public void setUp() {
+        /* Just retrieving the tested widgets from the GUI. */
         picker = find("#picker");
         text = find("#text");
         button = find("#button");
@@ -50,8 +60,10 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
         combobox = find("#combobox");
     }
 
+    /* IMO, it is quite recommended to clear the ongoing events, in case of. */
     @After
     public void tearDown() throws TimeoutException {
+        /* Close the window. It will be re-opened at the next test. */
         FxToolkit.hideStage();
         release(new KeyCode[] {});
         release(new MouseButton[] {});
@@ -69,7 +81,11 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
 
     @Test
     public void testTextofTextFieldBoundToColourPicker() {
+        /* pickColour is not supported by TestFX yet (as far as I know). The trait FxRobotColourPicker implements
+        such a robot. */
         pickColour(picker);
+        /* The following instruction is mandatory to wait for the end of the user interactions before running
+        the assertions. */
         WaitForAsyncUtils.waitForFxEvents();
 
         assertEquals("The binding between the colour picker and the text of the text field does not work",
@@ -126,6 +142,8 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
 
     @Test
     public void testChangeColourSetSpinnersValue() {
+        /* Changing a value of a widget may modifies its rendering, so this instruction must be executed in the
+        JavaFX thread. */
         Platform.runLater(() -> picker.setValue(new Color(0.1, 0.1, 0.1, 0.5)));
         WaitForAsyncUtils.waitForFxEvents();
 
