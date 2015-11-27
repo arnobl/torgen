@@ -2,8 +2,6 @@ package torgen.controller;
 
 import com.google.inject.Singleton;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,20 +43,14 @@ public class SimpleController implements Initializable {
 
         button.setOnAction(evt -> picker.setValue(picker.getValue().darker()));
 
-        picker.valueProperty().addListener(new ChangeListener<Color>() {
-            @Override
-            public void changed(ObservableValue observable, Color oldValue, Color newValue) {
-                spinner.getValueFactory().setValue(newValue.getOpacity() * 255d);
-            }
+        picker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            spinner.getValueFactory().setValue(newValue.getOpacity() * 255d);
         });
 
-        spinner.getValueFactory().valueProperty().addListener(new ChangeListener<Double>() {
-            @Override
-            public void changed(ObservableValue observable, Double oldValue, Double newValue) {
-                Color col = picker.valueProperty().getValue();
-                Color col2 = new Color(col.getRed(), col.getGreen(), col.getBlue(), newValue/255d);
-                picker.valueProperty().setValue(col2);
-            }
+        spinner.getValueFactory().valueProperty().addListener((observable, oldValue, newValue) -> {
+            Color col = picker.valueProperty().getValue();
+            Color col2 = new Color(col.getRed(), col.getGreen(), col.getBlue(), newValue/255d);
+            picker.valueProperty().setValue(col2);
         });
 
         picker.setValue(Color.LIGHTCORAL);

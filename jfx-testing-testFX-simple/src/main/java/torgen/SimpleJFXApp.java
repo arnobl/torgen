@@ -1,7 +1,5 @@
 package torgen;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
