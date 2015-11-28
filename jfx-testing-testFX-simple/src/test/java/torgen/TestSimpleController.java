@@ -128,6 +128,15 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
                 text.getText(), picker.getValue().toString());
     }
 
+
+    @Test
+    public void testSetIncorrectTextOfSpinnerChangesColourPickerToWhite() {
+        clickOn(text).type(KeyCode.END).type(KeyCode.BACK_SPACE, 10).type(KeyCode.NUMPAD0).type(KeyCode.ENTER);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        assertEquals(Color.WHITE, picker.getValue());
+    }
+
     @Test
     public void testClickOnButtonSetDarkerColour() {
         Color darker = picker.getValue().darker();
