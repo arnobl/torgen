@@ -49,7 +49,7 @@ public interface FxImageComparison {
     /**
      * From https://stackoverflow.com/questions/7292208/image-comparison-in-java
      */
-    default double computeSnapshotSimilarity(BufferedImage image1, BufferedImage image2) throws IOException {
+    default double computeSnapshotSimilarity(BufferedImage image1, BufferedImage image2) {
         int totalNoOfPixels = 0;
         int image1PixelColor;
         int red;

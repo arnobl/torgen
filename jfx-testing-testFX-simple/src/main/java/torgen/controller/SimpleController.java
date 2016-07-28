@@ -41,9 +41,7 @@ public class SimpleController implements Initializable {
 
         button.setOnAction(evt -> picker.setValue(picker.getValue().darker()));
 
-        picker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            spinner.getValueFactory().setValue((int) (255 * newValue.getOpacity()));
-        });
+        picker.valueProperty().addListener((observable, oldValue, newValue) -> spinner.getValueFactory().setValue((int) (255 * newValue.getOpacity())));
 
         spinner.getValueFactory().valueProperty().addListener((observable, oldValue, newValue) -> {
             Color col = picker.valueProperty().getValue();
