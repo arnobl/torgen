@@ -17,7 +17,7 @@ public class SimpleController implements Initializable {
     @FXML ColorPicker picker;
     @FXML TextField text;
     @FXML Button button;
-    @FXML Spinner<Double> spinner;
+    @FXML Spinner<Integer> spinner;
     @FXML ComboBox<Color> combobox;
 
     @Override
@@ -42,7 +42,7 @@ public class SimpleController implements Initializable {
         button.setOnAction(evt -> picker.setValue(picker.getValue().darker()));
 
         picker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            spinner.getValueFactory().setValue(newValue.getOpacity() * 255d);
+            spinner.getValueFactory().setValue((int) (255 * newValue.getOpacity()));
         });
 
         spinner.getValueFactory().valueProperty().addListener((observable, oldValue, newValue) -> {

@@ -35,14 +35,14 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
     ColorPicker picker;
     TextField text;
     Button button;
-    Spinner<Double> spinner;
+    Spinner<Integer> spinner;
     ComboBox<Color> combobox;
     Parent mainNode;
 
     /* This operation comes from ApplicationTest and loads the GUI to test. */
     @Override
     public void start(Stage stage) throws Exception {
-        mainNode = FXMLLoader.load(SimpleJFXApp.class.getResource("/torgen/ui/UI.fxml"));
+        mainNode = FXMLLoader.load(SimpleJFXApp.class.getResource("/fxml/torgen/ui/UI.fxml"));
         stage.setScene(new Scene(mainNode));
         stage.show();
         /* Do not forget to put the GUI in front of windows. Otherwise, the robots may interact with another
@@ -52,7 +52,7 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
 
     /* Just a shortcut to retrieve widgets in the GUI. */
     public <T extends Node> T find(final String query) {
-        /** TestFX provides many operations to retrieve elements from the loaded GUI. */
+        /* TestFX provides many operations to retrieve elements from the loaded GUI. */
         return lookup(query).queryFirst();
     }
 
@@ -162,7 +162,7 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
         Platform.runLater(() -> picker.setValue(new Color(0.1, 0.1, 0.1, 0.5)));
         WaitForAsyncUtils.waitForFxEvents();
 
-        assertEquals(0.5*255d, spinner.getValue(), 0.001);
+        assertEquals(127, spinner.getValue().intValue());
     }
 
     @Test
@@ -175,6 +175,6 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
 
     @Test
     public void testGUIRendering() throws IOException {
-        assertSnapshotsEqual("src/resources/test/snapshots/snapshotGUI.png", mainNode, 0d);
+        assertSnapshotsEqual(getClass().getResource("/test/snapshots/snapshotGUI.png").getFile(), mainNode, 0d);
     }
 }

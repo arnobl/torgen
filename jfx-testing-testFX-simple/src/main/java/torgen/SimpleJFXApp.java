@@ -13,7 +13,7 @@ public class SimpleJFXApp extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        final Parent view = FXMLLoader.load(getClass().getResource("/torgen/ui/UI.fxml"));
+        final Parent view = FXMLLoader.load(getClass().getResource("/fxml/torgen/ui/UI.fxml"));
         final Scene scene = new Scene(view);
 
         primaryStage.setTitle("TextFX demo");
