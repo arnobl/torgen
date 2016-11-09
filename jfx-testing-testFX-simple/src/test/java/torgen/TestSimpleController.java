@@ -100,9 +100,7 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
 
     @Test
     public void testSetTextOfSpinnerChangesColourPicker() {
-        clickOn(spinner);
-        clickOn(spinner).type(KeyCode.END).type(KeyCode.BACK_SPACE, 3).type(KeyCode.NUMPAD1).type(KeyCode.NUMPAD2).
-                type(KeyCode.NUMPAD7).type(KeyCode.ENTER);
+        clickOn(spinner).type(KeyCode.END).type(KeyCode.BACK_SPACE, 3).write("127").type(KeyCode.ENTER);
         WaitForAsyncUtils.waitForFxEvents();
 
         assertEquals(127d, picker.getValue().getOpacity()*255d, 0.001);
@@ -119,9 +117,7 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
 
     @Test
     public void testColourPickerBoundToTextFieldText() {
-        clickOn(text).type(KeyCode.END).type(KeyCode.BACK_SPACE, 10).type(KeyCode.NUMPAD0).type(KeyCode.X).
-                type(KeyCode.NUMPAD9).type(KeyCode.NUMPAD8).type(KeyCode.F).type(KeyCode.B).type(KeyCode.NUMPAD9).
-                type(KeyCode.NUMPAD9).type(KeyCode.F).type(KeyCode.F).type(KeyCode.ENTER);
+        clickOn(text).type(KeyCode.END).type(KeyCode.BACK_SPACE, 10).write("0x98fb99ff").type(KeyCode.ENTER);
         WaitForAsyncUtils.waitForFxEvents();
 
         assertEquals("The binding between the text of the text field and the selected colour of the color picker does not work",
