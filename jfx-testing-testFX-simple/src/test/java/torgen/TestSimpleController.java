@@ -1,5 +1,6 @@
 package torgen;
 
+import java.net.URISyntaxException;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -53,7 +54,7 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
     /* Just a shortcut to retrieve widgets in the GUI. */
     public <T extends Node> T find(final String query) {
         /* TestFX provides many operations to retrieve elements from the loaded GUI. */
-        return lookup(query).queryFirst();
+        return lookup(query).query();
     }
 
     @Before
@@ -170,7 +171,7 @@ public class TestSimpleController extends ApplicationTest implements FxRobotColo
     }
 
     @Test
-    public void testGUIRendering() throws IOException {
-        assertSnapshotsEqual(getClass().getResource("/test/snapshots/snapshotGUI.png").getFile(), mainNode, 0d);
+    public void testGUIRendering() throws IOException, URISyntaxException {
+        assertSnapshotsEqual(getClass().getResource("/test/snapshots/snapshotGUI.png").getFile(), mainNode, 0.01);
     }
 }
